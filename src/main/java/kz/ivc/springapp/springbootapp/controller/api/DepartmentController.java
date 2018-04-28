@@ -1,4 +1,4 @@
-package kz.ivc.springapp.springbootapp.controller;
+package kz.ivc.springapp.springbootapp.controller.api;
 
 import kz.ivc.springapp.springbootapp.model.Department;
 import kz.ivc.springapp.springbootapp.service.DepartmentService;
