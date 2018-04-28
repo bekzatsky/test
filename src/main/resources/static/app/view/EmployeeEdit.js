@@ -14,7 +14,7 @@ Ext.define('Sample.view.EmployeeEdit', {
                     {
                         xtype: 'textfield',
                         name : 'employeeId',
-                        fieldLabel: 'Имя',
+                        fieldLabel: 'ID',
                         disabled: true
                     },
                     {

@@ -1,4 +1,4 @@
-Ext.define('Sample.view.DepartmentView' ,{
+Ext.define('Sample.view.DepartmentView', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.departmentlist',
 

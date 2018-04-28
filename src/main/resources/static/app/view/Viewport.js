@@ -6,15 +6,19 @@ Ext.define('Sample.view.Viewport', {
         var me = this;
 
         Ext.apply(me, {
-            layout: 'accordion',
+            layout: 'border',
             items : [
                 {
                     xtype : 'departmentlist',
-                    layout: 'fit'
+                    layout: 'fit',
+                    region: 'center'
                 },
                 {
                     xtype : 'employeelist',
-                    layout: 'fit'
+                    layout: 'fit',
+                    region: 'east',
+                    width: 400,
+                    collapsible: true
                 }
             ]
 
