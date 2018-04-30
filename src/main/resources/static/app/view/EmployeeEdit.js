@@ -1,7 +1,7 @@
 Ext.define('Sample.view.EmployeeEdit', {
     extend: 'Ext.window.Window',
     alias: 'widget.employeeedit',
-    title: 'Редактировать',
+    id: 'employeeEditId',
     layout: 'fit',
     autoShow: true,
 

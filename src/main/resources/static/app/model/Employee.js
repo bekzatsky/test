@@ -4,6 +4,7 @@ Ext.define('Sample.model.Employee', {
     fields: [
         {name:'employeeId', type:'long'},
         {name:'firstName', type:'string'},
-        {name:'lastName', type:'string'}
+        {name:'lastName', type:'string'},
+        {name:'departmentId', type:'auto'}
     ]
 });

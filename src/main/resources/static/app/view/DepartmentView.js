@@ -7,6 +7,28 @@ Ext.define('Sample.view.DepartmentView', {
 
     initComponent: function() {
 
+        this.dockedItems = [
+            {
+                xtype:'toolbar',
+                items: [
+                    {
+                        text: 'Добавить',
+                        action: 'add'
+                    },
+                    {
+                        text: 'Редактировать',
+                        action: 'edit',
+                        disabled: true,
+                        id: 'editDepartmentId'
+                    },
+                    {
+                        text: 'Удалить',
+                        action: 'delete'
+                    }
+                ]
+            }
+        ];
+
         this.columns = [
             {header: 'ID',  dataIndex: 'departmentId',  flex: 1},
             {header: 'Департамент', dataIndex: 'departmentName', flex: 11}

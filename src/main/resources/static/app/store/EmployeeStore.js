@@ -9,8 +9,8 @@ Ext.define('Sample.store.EmployeeStore', {
         url: '/api/employees',
         reader: {
             type: 'json',
-            root: 'employees',
-            successProperty: 'success'
+            //root: 'employees',
+            //successProperty: 'success'
         }
     }
 });

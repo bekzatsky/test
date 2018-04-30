@@ -7,6 +7,28 @@ Ext.define('Sample.view.EmployeeView' ,{
 
     initComponent: function() {
 
+        this.dockedItems = [
+            {
+                xtype: 'toolbar',
+                items: [
+                    {
+                        text: 'Добавить',
+                        action: 'add'
+                    },
+                    {
+                        text: 'Редактировать',
+                        action: 'edit',
+                        disabled: true,
+                        id: 'editEmployeeId'
+                    },
+                    {
+                        text: 'Удалить',
+                        action: 'delete'
+                    }
+                ]
+            }
+        ];
+
         this.columns = [
             {header: 'ID',  dataIndex: 'employeeId',  flex: 1},
             {header: 'Имя', dataIndex: 'firstName', flex: 5},
