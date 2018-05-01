@@ -26,6 +26,15 @@ Ext.define('Sample.view.EmployeeEdit', {
                         xtype: 'textfield',
                         name : 'lastName',
                         fieldLabel: 'Фамилия'
+                    },
+                    {
+                        xtype: 'combobox',
+                        fieldLabel: 'Департамент',
+                        emptyText: 'Выберите департамент',
+                        store: 'DepartmentStore',
+                        displayField: 'departmentName',
+                        valueField: 'departmentId',
+                        grow: true
                     }
                 ]
             }

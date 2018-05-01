@@ -55,7 +55,7 @@ Ext.define('Sample.controller.MainController', {
         Ext.create('Sample.view.EmployeeEdit').setTitle('Добавить сотрудника');
     },
 
-    editEmployee: function(grid, record) {
+    editEmployee: function() {
         Ext.create('Sample.view.EmployeeEdit').setTitle('Редактировать сотрудника');
         var formEdit = Ext.getCmp('formEditId').getForm();
         formEdit.loadRecord(this.rec);
