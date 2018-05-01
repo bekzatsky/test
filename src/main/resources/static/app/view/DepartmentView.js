@@ -23,7 +23,9 @@ Ext.define('Sample.view.DepartmentView', {
                     },
                     {
                         text: 'Удалить',
-                        action: 'delete'
+                        action: 'delete',
+                        disabled: true,
+                        id: 'deleteDepartmentId'
                     }
                 ]
             }

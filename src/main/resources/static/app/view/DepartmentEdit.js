@@ -13,8 +13,17 @@ Ext.define('Sample.view.DepartmentEdit', {
                 items: [
                     {
                         xtype: 'textfield',
+                        name : 'departmentId',
+                        fieldLabel: 'ID',
+                        disabled: true,
+                        id: 'departmentId'
+                    },
+                    {
+                        xtype: 'textfield',
                         name : 'departmentName',
-                        fieldLabel: 'Департамент'
+                        fieldLabel: 'Департамент',
+                        grow: true,
+                        id: 'departmentName'
                     }
                 ]
             }

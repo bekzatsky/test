@@ -26,6 +26,12 @@ Ext.define('Sample.controller.MainController', {
             'departmentlist button[action=edit]': {
                 click: this.editDepartment
             },
+            'departmentedit button[action=save]': {
+                click: this.saveDepartment
+            },
+            'departmentlist button[action=delete]': {
+                click: this.deleteDepartment
+            },
             'employeelist': {
                 itemclick:this.clickItemEmployee
             },
@@ -34,24 +40,55 @@ Ext.define('Sample.controller.MainController', {
             },
             'employeelist button[action=edit]': {
                 click: this.editEmployee
+            },
+            'employeeedit button[action=save]': {
+                click: this.saveEmployee
+            },
+            'employeelist button[action=delete]': {
+                click: this.deleteEmployee
             }
 
         })
     },
 
     addEmployee: function() {
-        Ext.create('Sample.view.EmployeeEdit').setTitle('Добавить');
+        Ext.create('Sample.view.EmployeeEdit').setTitle('Добавить сотрудника');
     },
 
     editEmployee: function(grid, record) {
-        Ext.create('Sample.view.EmployeeEdit');
+        Ext.create('Sample.view.EmployeeEdit').setTitle('Редактировать сотрудника');
         var formEdit = Ext.getCmp('formEditId').getForm();
+        formEdit.loadRecord(this.rec);
+    },
+
+    clickItemEmployee: function (grid, record) {
+        Ext.getCmp('editEmployeeId').setDisabled(false);
+        Ext.getCmp('deleteEmployeeId').setDisabled(false);
+        this.rec = record;
+    },
+
+    saveEmployee: function () {
+        console.log('employee created')
+    },
+
+    deleteEmployee: function () {
+        console.log('employee deleted')
+    },
+
+    addDepartment: function() {
+        Ext.create('Sample.view.DepartmentEdit').setTitle('Добавить департамент');
+    },
+
+    editDepartment: function() {
+        Ext.create('Sample.view.DepartmentEdit').setTitle('Редактировать департамент');
+        var formEdit = Ext.getCmp('departmentFormEditId').getForm();
         formEdit.loadRecord(this.rec);
     },
 
     clickItemDepartment: function (grid, record) {
 
         Ext.getCmp('editDepartmentId').setDisabled(false);
+        Ext.getCmp('deleteDepartmentId').setDisabled(false);
 
         this.rec = record;
 
@@ -60,20 +97,13 @@ Ext.define('Sample.controller.MainController', {
         Ext.getStore('EmployeeStore').load();
     },
 
-    clickItemEmployee: function (grid, record) {
-
-        Ext.getCmp('editEmployeeId').setDisabled(false);
-
-        this.rec = record;
+    saveDepartment: function () {
+        // var departmentId = Ext.getCmp('departmentId').getValue();
+        // var departmentName = Ext.getCmp('departmentName').getValue();
+        console.log(departmentId + ' ' + departmentName);
     },
 
-    addDepartment: function() {
-        Ext.create('Sample.view.DepartmentEdit').setTitle('Добавить');
-    },
-
-    editDepartment: function() {
-        Ext.create('Sample.view.DepartmentEdit').setTitle('Редактировать');
-        var formEdit = Ext.getCmp('departmentFormEditId').getForm();
-        formEdit.loadRecord(this.rec);
+    deleteDepartment: function () {
+        console.log('department deleted')
     }
 });
