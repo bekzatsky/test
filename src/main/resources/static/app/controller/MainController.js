@@ -82,7 +82,10 @@ Ext.define('Sample.controller.MainController', {
             method: 'put',
             jsonData: Ext.encode(
                 {"firstName" : form.getValues().firstName,
-                    "lastName" : form.getValues().lastName
+                    "lastName" : form.getValues().lastName,
+                    "department" : {
+                        "departmentId" : form.getValues().department
+                    }
                 }),
 
             success: function () {

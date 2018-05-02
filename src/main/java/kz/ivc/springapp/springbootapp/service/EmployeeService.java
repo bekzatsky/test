@@ -39,9 +39,12 @@ public class EmployeeService {
 
     public void updateEmployee(Long id, Employee employee) {
         Optional<Employee> employeeOptional = employeeDao.findById(id);
+
         Employee currentEmployee = employeeOptional.get();
         currentEmployee.setFirstName(employee.getFirstName());
         currentEmployee.setLastName(employee.getLastName());
+        currentEmployee.setDepartment(employee.getDepartment());
+
         employeeDao.save(currentEmployee);
     }
 
