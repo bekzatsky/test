@@ -68,7 +68,26 @@ Ext.define('Sample.controller.MainController', {
     },
 
     saveEmployee: function () {
-        console.log('employee created')
+        var id = this.rec.data.employeeId;
+
+        var form = Ext.getCmp('formEditId').getForm();
+        console.log(form.getValues().firstName + ' ' + form.getValues().lastName)
+
+        Ext.Ajax.request({
+
+            url :'/api/employee/update/' + id ,
+            method: 'put',
+            jsonData: Ext.encode(
+                {"firstName" : form.getValues().firstName,
+                    "lastName" : form.getValues().lastName
+                }),
+
+            success: function () {
+                Ext.getStore('EmployeeStore').load();
+
+                Ext.getCmp('employeeEditId').destroy();
+            }
+        });
     },
 
     deleteEmployee: function () {
@@ -115,8 +134,6 @@ Ext.define('Sample.controller.MainController', {
                 Ext.getStore('DepartmentStore').load();
 
                 Ext.getCmp('departmenteditId').destroy();
-
-                // ddd.destroy();
             }
         });
     },

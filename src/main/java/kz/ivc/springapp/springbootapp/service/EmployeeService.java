@@ -37,8 +37,12 @@ public class EmployeeService {
         employeeDao.save(employee);
     }
 
-    public void updateEmployee(Employee employee) {
-        employeeDao.save(employee);
+    public void updateEmployee(Long id, Employee employee) {
+        Optional<Employee> employeeOptional = employeeDao.findById(id);
+        Employee currentEmployee = employeeOptional.get();
+        currentEmployee.setFirstName(employee.getFirstName());
+        currentEmployee.setLastName(employee.getLastName());
+        employeeDao.save(currentEmployee);
     }
 
     public void deleteEmployee(Long id) {
