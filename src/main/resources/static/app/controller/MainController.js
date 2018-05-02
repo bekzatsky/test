@@ -77,6 +77,8 @@ Ext.define('Sample.controller.MainController', {
 
     addDepartment: function() {
         Ext.create('Sample.view.DepartmentEdit').setTitle('Добавить департамент');
+        var departmentName = Ext.getCmp('departmentName').getValue();
+        console.log(departmentName);
     },
 
     editDepartment: function() {
@@ -98,12 +100,37 @@ Ext.define('Sample.controller.MainController', {
     },
 
     saveDepartment: function () {
-        // var departmentId = Ext.getCmp('departmentId').getValue();
-        // var departmentName = Ext.getCmp('departmentName').getValue();
-        console.log(departmentId + ' ' + departmentName);
+
+        var id = this.rec.data.departmentId;
+
+        var form = Ext.getCmp('departmentFormEditId').getForm();
+
+        Ext.Ajax.request({
+
+            url :'/api/department/update/' + id ,
+            method: 'put',
+            jsonData: Ext.encode({"departmentName" : form.getValues().departmentName}),
+
+            success: function () {
+                Ext.getStore('DepartmentStore').load();
+
+                Ext.getCmp('departmenteditId').destroy();
+
+                // ddd.destroy();
+            }
+        });
     },
 
     deleteDepartment: function () {
-        console.log('department deleted')
+        var id = this.rec.data.departmentId;
+        Ext.Ajax.request({
+
+            url :'/api/department/delete/' + id ,
+            method: 'delete',
+
+            success: function () {
+                Ext.getStore('DepartmentStore').load();
+            }
+        });
     }
 });

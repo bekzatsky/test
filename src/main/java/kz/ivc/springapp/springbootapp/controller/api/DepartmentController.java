@@ -30,13 +30,13 @@ public class DepartmentController {
         departmentService.saveDepartment(department);
     }
 
-    @PutMapping("/department")
-    public void updateDepartment(@RequestBody Department department) {
-        departmentService.saveDepartment(department);
+    @PutMapping("/department/update/{id}")
+    public void updateDepartment(@PathVariable("id") Long id, @RequestBody Department department) {
+        departmentService.updateDepartment(id, department);
     }
 
-    @DeleteMapping("/department/{id}")
-    public void deleteDepartment(@PathVariable Long id) {
+    @DeleteMapping("/department/delete/{id}")
+    public void deleteDepartment(@PathVariable("id") Long id) {
         departmentService.deleteDepartment(id);
     }
 }

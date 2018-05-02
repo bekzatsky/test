@@ -31,8 +31,11 @@ public class DepartmentService {
     }
 
 
-    public void updateDepartment(Department department) {
-        departmentDao.save(department);
+    public void updateDepartment(Long id, Department department) {
+        Optional<Department> departmentOptional = departmentDao.findById(id);
+        Department currentDepartmnet = departmentOptional.get();
+        currentDepartmnet.setDepartmentName(department.getDepartmentName());
+        departmentDao.save(currentDepartmnet);
     }
 
 
