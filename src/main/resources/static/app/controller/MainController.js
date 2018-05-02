@@ -59,6 +59,9 @@ Ext.define('Sample.controller.MainController', {
         Ext.create('Sample.view.EmployeeEdit').setTitle('Редактировать сотрудника');
         var formEdit = Ext.getCmp('formEditId').getForm();
         formEdit.loadRecord(this.rec);
+        //устанавливаем значение департамента по умолчанию
+        var department = this.rec.raw.department.departmentId;
+        Ext.getCmp('depCombo').setValue(department);
     },
 
     clickItemEmployee: function (grid, record) {
@@ -71,7 +74,7 @@ Ext.define('Sample.controller.MainController', {
         var id = this.rec.data.employeeId;
 
         var form = Ext.getCmp('formEditId').getForm();
-        console.log(form.getValues().firstName + ' ' + form.getValues().lastName)
+        console.log(form.getValues().department)
 
         Ext.Ajax.request({
 
