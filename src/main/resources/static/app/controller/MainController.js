@@ -21,10 +21,13 @@ Ext.define('Sample.controller.MainController', {
                 itemclick:this.clickItemDepartment
             },
             'departmentlist button[action=add]': {
-                click: this.addDepartment
+                click: this.addDepartmentWin
             },
             'departmentlist button[action=edit]': {
                 click: this.editDepartment
+            },
+            'departmentadd button[action=save]': {
+                click: this.addDepartment
             },
             'departmentedit button[action=save]': {
                 click: this.saveDepartment
@@ -36,10 +39,13 @@ Ext.define('Sample.controller.MainController', {
                 itemclick:this.clickItemEmployee
             },
             'employeelist button[action=add]': {
-                click: this.addEmployee
+                click: this.addEmployeeWin
             },
             'employeelist button[action=edit]': {
                 click: this.editEmployee
+            },
+            'employeeadd button[action=save]': {
+                click: this.addEmployee
             },
             'employeeedit button[action=save]': {
                 click: this.saveEmployee
@@ -52,7 +58,30 @@ Ext.define('Sample.controller.MainController', {
     },
 
     addEmployee: function() {
-        Ext.create('Sample.view.EmployeeEdit').setTitle('Добавить сотрудника');
+        var form = Ext.getCmp('formAddId').getForm();
+        console.log(form.getValues());
+
+        Ext.Ajax.request({
+
+            url :'/api/employee/add',
+            method: 'post',
+            jsonData: Ext.encode(
+                {"firstName" : form.getValues().firstName,
+                    "lastName" : form.getValues().lastName,
+                    "department" : {
+                        "departmentId" : form.getValues().department
+                    }
+                }),
+
+            success: function () {
+                Ext.getStore('EmployeeStore').load();
+                Ext.getCmp('employeeaddId').destroy();
+            }
+        });
+    },
+
+    addEmployeeWin: function () {
+        Ext.create('Sample.view.EmployeeAdd').setTitle('Добавить сотрудника');
     },
 
     editEmployee: function() {
@@ -97,13 +126,38 @@ Ext.define('Sample.controller.MainController', {
     },
 
     deleteEmployee: function () {
-        console.log('employee deleted')
+        var id = this.rec.data.employeeId;
+        Ext.Ajax.request({
+
+            url :'/api/employee/delete/' + id ,
+            method: 'delete',
+
+            success: function () {
+                Ext.getStore('EmployeeStore').load();
+            }
+        });
     },
 
     addDepartment: function() {
-        Ext.create('Sample.view.DepartmentEdit').setTitle('Добавить департамент');
         var departmentName = Ext.getCmp('departmentName').getValue();
-        console.log(departmentName);
+
+        Ext.Ajax.request({
+
+            url :'/api/department/add',
+            method: 'post',
+            jsonData: Ext.encode(
+                {"departmentName" : departmentName
+                }),
+
+            success: function () {
+                Ext.getStore('DepartmentStore').load();
+                Ext.getCmp('departmentaddId').destroy();
+            }
+        });
+    },
+
+    addDepartmentWin: function () {
+        Ext.create('Sample.view.DepartmentAdd').setTitle('Добавить департамент');
     },
 
     editDepartment: function() {

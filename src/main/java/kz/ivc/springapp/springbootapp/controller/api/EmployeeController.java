@@ -31,8 +31,8 @@ public class EmployeeController {
     }
 
 
-    @PostMapping("/employee")
-    public void saveEmployee(@PathVariable Employee employee) {
+    @PostMapping("/employee/add")
+    public void saveEmployee(@RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
     }
 
@@ -41,8 +41,8 @@ public class EmployeeController {
         employeeService.updateEmployee(id, employee);
     }
 
-    @DeleteMapping("/employee/{id}")
-    public void deleteEmployee(@RequestBody Long id) {
+    @DeleteMapping("/employee/delete/{id}")
+    public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
     }
 }
