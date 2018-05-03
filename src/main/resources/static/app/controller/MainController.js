@@ -200,14 +200,35 @@ Ext.define('Sample.controller.MainController', {
 
     deleteDepartment: function () {
         var id = this.rec.data.departmentId;
-        Ext.Ajax.request({
+        var employees = Ext.getStore('EmployeeStore').load().data.items.length;
+        if (employees === 0) {
+            Ext.Ajax.request({
 
-            url :'/api/department/delete/' + id ,
-            method: 'delete',
+                url :'/api/department/delete/' + id ,
+                method: 'delete',
 
-            success: function () {
-                Ext.getStore('DepartmentStore').load();
+                success: function () {
+                    Ext.getStore('DepartmentStore').load();
+                }
+            });
+        } else {
+            Ext.MessageBox.confirm(
+                'Внимание', 'В департаменте числятся сотрудники. Вы уверены что хотите удалить департамент?', callbackFunction);
+            function callbackFunction(btn) {
+                if(btn == 'yes') {
+                    Ext.Ajax.request({
+
+                        url :'/api/department/delete/' + id ,
+                        method: 'delete',
+
+                        success: function () {
+                            Ext.getStore('DepartmentStore').load();
+                        }
+                    });
+                }
             }
-        });
+        }
+
     }
+
 });
