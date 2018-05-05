@@ -19,6 +19,13 @@ Ext.define('Sample.view.Viewport', {
                     region: 'east',
                     width: 400,
                     collapsible: true
+                },
+                {
+                    xtype : 'download',
+                    layout: 'fit',
+                    region: 'south',
+                    width: 400,
+                    collapsible: true
                 }
             ]
 

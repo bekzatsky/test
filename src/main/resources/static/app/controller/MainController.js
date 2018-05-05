@@ -2,7 +2,7 @@ Ext.define('Sample.controller.MainController', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'DepartmentView', 'EmployeeView'
+        'DepartmentView', 'EmployeeView', 'Download'
     ],
 
     stores: [

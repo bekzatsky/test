@@ -26,6 +26,11 @@ Ext.define('Sample.view.EmployeeView' ,{
                         action: 'delete',
                         disabled: true,
                         id: 'deleteEmployeeId'
+                    },
+                    {
+                        text: 'Выгрузить',
+                        action: 'download',
+                        id: 'download'
                     }
                 ]
             }
