@@ -6,9 +6,9 @@ Ext.define('Sample.store.EmployeeStore', {
     proxy: {
         type: 'rest',
         method: 'GET',
-        url: '/api/employees',
+        url: '',
         reader: {
-            type: 'json',
+            type: 'json'
             //root: 'employees',
             //successProperty: 'success'
         }

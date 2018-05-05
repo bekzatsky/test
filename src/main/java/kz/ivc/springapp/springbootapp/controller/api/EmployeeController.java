@@ -45,4 +45,10 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
     }
+
+    @GetMapping("/download/{id}")
+    public void download(@PathVariable("id") Long id,
+                         @RequestParam(value="filename") String filename) {
+        employeeService.download(id, filename);
+    }
 }

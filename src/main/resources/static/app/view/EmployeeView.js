@@ -30,7 +30,8 @@ Ext.define('Sample.view.EmployeeView' ,{
                     {
                         text: 'Выгрузить',
                         action: 'download',
-                        id: 'download'
+                        id: 'download',
+                        disabled: true
                     }
                 ]
             }

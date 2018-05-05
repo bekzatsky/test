@@ -2,15 +2,15 @@ Ext.define('Sample.controller.MainController', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'DepartmentView', 'EmployeeView', 'Download'
+        'DepartmentView', 'EmployeeView', 'DownloadView'
     ],
 
     stores: [
-        'DepartmentStore', 'EmployeeStore'
+        'DepartmentStore', 'EmployeeStore', 'DownloadStore'
     ],
 
     models: [
-        'Department', 'Employee'
+        'Department', 'Employee', 'Download'
     ],
 
     var: recDep = null,
@@ -52,6 +52,12 @@ Ext.define('Sample.controller.MainController', {
             },
             'employeelist button[action=delete]': {
                 click: this.deleteEmployee
+            },
+            'employeelist button[action=download]': {
+                click: this.download
+            },
+            'filename button[action=save]': {
+                click: this.filenameSave
             }
 
         })
@@ -103,7 +109,7 @@ Ext.define('Sample.controller.MainController', {
         var id = this.rec.data.employeeId;
 
         var form = Ext.getCmp('formEditId').getForm();
-        console.log(form.getValues().department)
+        console.log(form.getValues().department);
 
         Ext.Ajax.request({
 
@@ -170,6 +176,7 @@ Ext.define('Sample.controller.MainController', {
 
         Ext.getCmp('editDepartmentId').setDisabled(false);
         Ext.getCmp('deleteDepartmentId').setDisabled(false);
+        Ext.getCmp('download').setDisabled(false);
 
         this.rec = record;
 
@@ -228,6 +235,31 @@ Ext.define('Sample.controller.MainController', {
                 }
             }
         }
+
+    },
+    
+    download: function () {
+
+        Ext.create('Sample.view.Filename');
+    },
+
+    filenameSave: function () {
+        var id = this.rec.data.departmentId;
+        var value = Ext.getCmp('filenameedit').getForm().getValues().filename;
+        console.log(id + value);
+
+
+        Ext.Ajax.request({
+
+            url :'/api/download/' + id + '?filename=' + value,
+            method: 'get',
+
+            success: function () {
+                Ext.getCmp('filenamewin').destroy();
+                Ext.getStore('DownloadStore').load();
+            }
+        });
+
 
     }
 
