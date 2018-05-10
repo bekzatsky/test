@@ -4,6 +4,7 @@ Ext.define('Sample.model.Download', {
     fields: [
         {name:'id', type:'long'},
         {name:'filename', type:'string'},
-        {name:'path', type:'string'}
+        {name:'path', type:'string'},
+        {name:'status', type:'string'}
     ]
 });

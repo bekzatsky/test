@@ -9,24 +9,26 @@ public class Download {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_TEST_DOWNLOAD")
     @SequenceGenerator(sequenceName = "SEQ_TEST_DOWNLOAD", allocationSize = 1, name = "SEQ_TEST_DOWNLOAD")
-    private int id;
+    private Long id;
     private String filename;
     private String path;
+    private String status;
 
     public Download() {
     }
 
-    public Download(int id, String filename, String path) {
+    public Download(Long id, String filename, String path, String status) {
         this.id = id;
         this.filename = filename;
         this.path = path;
+        this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,5 +46,13 @@ public class Download {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

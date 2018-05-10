@@ -59,31 +59,18 @@ public class EmployeeService {
         employeeDao.deleteById(id);
     }
 
-    public void download(Long id, String filename) {
+    public Long download(Long id, String filename) {
 
         String sys = System.getProperty("user.home");
         String path = sys + "/Рабочий стол/" + filename + ".txt";
 
-        XStream xStream = new XStream();
-        List<Employee> employeesByDepartment = this.getListEmployeeByDepartment(id);
-        String xml = xStream.toXML(employeesByDepartment);
-
-        try {
-            FileOutputStream fos = new FileOutputStream(path);
-            // перевод строки в байты
-            byte[] buffer = xml.getBytes();
-
-            fos.write(buffer, 0, buffer.length);
-        }
-        catch(IOException ex){
-
-            System.out.println(ex.getMessage());
-        }
-        System.out.println("The file has been written " + path);
 
         Download download = new Download();
         download.setFilename(filename);
         download.setPath(path);
-        downloadDao.save(download);
+        download.setStatus("В обработке");
+        Download save = downloadDao.save(download);
+        System.out.println(save.getId());
+        return save.getId();
     }
 }

@@ -58,6 +58,9 @@ Ext.define('Sample.controller.MainController', {
             },
             'filename button[action=save]': {
                 click: this.filenameSave
+            },
+            'download button[action=refresh]': {
+                click: this.refreshDownloadStore
             }
 
         })
@@ -259,8 +262,10 @@ Ext.define('Sample.controller.MainController', {
                 Ext.getStore('DownloadStore').load();
             }
         });
+    },
 
-
+    refreshDownloadStore: function () {
+        Ext.getStore('DownloadStore').load();
     }
 
 });

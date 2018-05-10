@@ -1,10 +1,12 @@
 package kz.ivc.springapp.springbootapp.controller.api;
 
+import kz.ivc.springapp.springbootapp.jms.Sender;
 import kz.ivc.springapp.springbootapp.model.Employee;
 import kz.ivc.springapp.springbootapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jms.Message;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private Sender sender;
 
     @GetMapping("/employees")
     List<Employee> getEmployees() {
@@ -49,6 +54,20 @@ public class EmployeeController {
     @GetMapping("/download/{id}")
     public void download(@PathVariable("id") Long id,
                          @RequestParam(value="filename") String filename) {
-        employeeService.download(id, filename);
+        Long exportId = employeeService.download(id, filename);
+        this.messageSender(id, exportId, filename);
+    }
+
+
+    private void messageSender(Long id, Long exportId, String filename){
+
+        sender.send("kz.ivc.stat.sample.test", session -> {
+
+            Message message = session.createMessage();
+            message.setStringProperty("filename",filename);
+            message.setLongProperty("departmentId", id);
+            message.setLongProperty("exportId", exportId);
+            return message;
+        });
     }
 }
