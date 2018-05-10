@@ -58,7 +58,6 @@ public class Receiver {
                 download.setStatus("Готово");
                 downloadDao.save(download);
 
-
             }
             catch(IOException ex){
 
