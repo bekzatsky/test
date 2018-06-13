@@ -13,7 +13,9 @@ Ext.define('Sample.controller.MainController', {
         'Department', 'Employee', 'Download'
     ],
 
-    var: recDep = null,
+    config: {
+        rec: null
+    },
 
     init: function() {
         this.control({
